@@ -1,9 +1,9 @@
-const willSmithImage = "https://i2-prod.hulldailymail.co.uk/incoming/article6873985.ece/ALTERNATES/s615/0_Will-Smith.jpg";
+// const willSmithImage = "https://i2-prod.hulldailymail.co.uk/incoming/article6873985.ece/ALTERNATES/s615/0_Will-Smith.jpg";
 
-const imgs = document.getElementsByTagName("img");
-for (let i = 0; i < imgs.length; i++) {
-    imgs[i].src = willSmithImage;
-}
+// const imgs = document.getElementsByTagName("img");
+// for (let i = 0; i < imgs.length; i++) {
+//     imgs[i].src = willSmithImage;
+// }
 
 const bookmarkButton = document.createElement('button');
 
