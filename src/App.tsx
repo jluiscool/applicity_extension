@@ -1,3 +1,4 @@
+/*global chrome*/
 import "./App.css";
 
 import {
@@ -15,6 +16,7 @@ import {
   Route,
   MemoryRouter
 } from "react-router-dom";
+import { useEffect } from "react";
 
 function HelloUser() {
   const { isSignedIn, user } = useUser();
@@ -66,6 +68,7 @@ function ClerkProviderWithRoutes() {
 }
 
 function App() {
+
   return (
     <MemoryRouter>
       <ClerkProviderWithRoutes />
