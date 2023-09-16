@@ -7,10 +7,13 @@
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
+  "background": {
+    "service_worker": "Background.js"
+  },
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://www.linkedin.com/*"
       ],
       "js": [
         "Content.js"
@@ -21,5 +24,15 @@
     "16": "logo192.png",
     "48": "logo192.png",
     "128": "logo192.png"
-  }
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "notifications",
+    "cookies"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ]
 }

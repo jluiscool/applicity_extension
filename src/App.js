@@ -16,7 +16,6 @@ import {
   Route,
   MemoryRouter
 } from "react-router-dom";
-import { useEffect } from "react";
 
 function HelloUser() {
   const { isSignedIn, user } = useUser();
@@ -25,6 +24,19 @@ function HelloUser() {
   if (!isSignedIn) {
     return null;
   }
+
+  chrome.runtime.sendMessage(
+    { greeting: user.primaryEmailAddress?.emailAddress },
+    function (response) {
+      console.log(response.farewell)
+    }
+  )
+
+  const data = user.primaryEmailAddress.emailAddress
+
+  chrome.storage.local.set({ cache: data, cacheTime: Date.now() }, function () {
+    console.log(data);
+  });
 
   return (
     <>
