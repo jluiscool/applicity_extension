@@ -34,7 +34,7 @@ function HelloUser() {
   );
 }
 
-const publishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY || "";
+const publishableKey = "pk_test_ZGV2b3RlZC1raW5nZmlzaC0xNy5jbGVyay5hY2NvdW50cy5kZXYk";
 
 function ClerkProviderWithRoutes() {
   const navigate = useNavigate();
@@ -42,17 +42,6 @@ function ClerkProviderWithRoutes() {
   return (
     <ClerkProvider publishableKey={publishableKey} navigate={(to) => navigate(to)}>
       <div className="App">
-        <header className="App-header">
-          <p>Welcome to Clerk Chrome Extension Starter!</p>
-          <a
-            className="App-link"
-            href="https://clerk.dev/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn more about Clerk
-          </a>
-        </header>
         <main className="App-main">
           <Routes>
             <Route
