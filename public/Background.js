@@ -9,19 +9,15 @@ const newData = chrome.storage.sync.get(null, function (items) {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-
         console.log(request.greeting)
         console.log(cookies)
         console.log(newData)
         sendResponse({ farewell: "goodbye" })
-
     }
 );
 
 
 chrome.storage.local.get(['cache', 'cacheTime'], function (items) {
-
         console.log(items)
-
 });
 
