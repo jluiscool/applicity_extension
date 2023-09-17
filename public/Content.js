@@ -8,6 +8,11 @@ apply date Date.now(),
 jobInfo,
 */
 let bookmarkButton;
+let userEmail;
+
+chrome.storage.local.get(['cache', 'cacheTime'], function (items) {
+    userEmail = items.cache;
+});
 
 function initializeJobDetails() {
     // Function to extract job details
@@ -71,12 +76,7 @@ function initializeJobDetails() {
             bookmarkButton.style.backgroundColor = 'red';
             bookmarkButton.style.borderWidth = '3px';
 
-            let userEmail = "";
-
-            chrome.storage.local.get(['cache', 'cacheTime'], function (items) {
-                userEmail = items.cache;
-                bookmarkButton.textContent = userEmail;
-            });
+            bookmarkButton.textContent = userEmail;
 
             const firstButtonContainer = document.querySelector('.jobs-unified-top-card__content--two-pane');
 
@@ -89,6 +89,7 @@ function initializeJobDetails() {
                 // Handle the button click, e.g., display job details
                 console.log('Bookmark button clicked!');
                 const jobDetails = extractJobDetails(); // Get the latest job details
+                jobDetails.userEmail = userEmail;
                 console.log(jobDetails);
             });
         }
