@@ -23,7 +23,7 @@ function initializeJobDetails() {
         let jobTitleFullText = jobTitleHeader.textContent;
         jobTitle = jobTitleFullText.replace(/\s{2,}/g, ' ');
         jobTitle = jobTitle.replace(/^\s+/, '');
-        console.log(jobTitle + "This is job title");
+        // console.log(jobTitle + "This is job title");
 
         //salary
         let salary = "";
@@ -31,39 +31,69 @@ function initializeJobDetails() {
         if (salaryLink) {
             // Anchor element found, you can proceed with further actions.
             salary = salaryLink.textContent;
-            console.log(salary + " this is salary");
+            // console.log(salary + " this is salary");
         } else {
             salary = "Salary not specified";
-            console.log(salary);
+            // console.log(salary);
         }
 
         // company name
         let companyName = "";
         let postOuterDiv = document.querySelector(".jobs-unified-top-card__primary-description");
         let firstChildDiv = postOuterDiv.querySelector("div:first-child");
-        console.log(firstChildDiv + "first child div of company Name");
+        // console.log(firstChildDiv + "first child div of company Name");
         let anchorTag = firstChildDiv.querySelector("a:first-child");
         companyName = anchorTag.textContent;
-        console.log(companyName + "company name");
+        // console.log(companyName + "company name");
 
         //jobInfo
         let jobInfo = "";
         let outerJobInfoDiv = document.querySelector("li.jobs-unified-top-card__job-insight");
-        console.log(outerJobInfoDiv);
+        // console.log(outerJobInfoDiv);
         let firstSpanChild = outerJobInfoDiv.getElementsByTagName("span");
-        console.log(firstSpanChild[0].textContent + "first span");
+        // console.log(firstSpanChild[0].textContent + "first span");
         jobInfo = firstSpanChild[0].textContent;
         jobInfo = jobInfo.replace(/\s{2,}/g, ' ');
         jobInfo = jobInfo.replace(/^\s+/, '');
-        console.log(jobInfo + "this is the job info");
+        // console.log(jobInfo + "this is the job info");
 
         // Return the extracted job details
         return {
-            jobTitle: jobTitle,
-            jobInfo: jobInfo,
-            companyName: companyName,
+            role_name: jobTitle,
+            job_info: jobInfo,
+            company_name: companyName,
             salary: salary
         };
+    }
+
+    function makeApplicationPost(data) {
+        const url = 'http://localhost:3001/applications';
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set the content type to JSON
+                // You can add other headers if needed
+            },
+            body: JSON.stringify(data), // Convert data to JSON string
+        };
+
+        fetch(url, requestOptions)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // console.log(response.json)
+                return response.json(); // Parse the response as JSON
+            })
+            .then((data) => {
+                // Handle the response data here
+                console.log('Response data:', data);
+            })
+            .catch((error) => {
+                // Handle errors here
+                console.error('Error:', error);
+            });
     }
 
     // Function to create and append the bookmark button
@@ -89,8 +119,9 @@ function initializeJobDetails() {
                 // Handle the button click, e.g., display job details
                 console.log('Bookmark button clicked!');
                 const jobDetails = extractJobDetails(); // Get the latest job details
-                jobDetails.userEmail = userEmail;
+                jobDetails.user_email = userEmail;
                 console.log(jobDetails);
+                makeApplicationPost(jobDetails)
             });
         }
     }
@@ -108,7 +139,7 @@ function initializeJobDetails() {
             observer.disconnect(); // Stop observing DOM changes
 
             // Extract job details
-            const jobDetails = extractJobDetails();
+            // const jobDetails = extractJobDetails();
 
             // Create and attach the bookmark button
             createBookmarkButton();
@@ -124,12 +155,12 @@ initializeJobDetails();
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.tabId && message.tabUrl) {
         // Access the tab ID and URL from the message object
-        const tabId = message.tabId;
-        const tabUrl = message.tabUrl;
+        // const tabId = message.tabId;
+        // const tabUrl = message.tabUrl;
 
         // Now you can use tabId and tabUrl in your content.js logic
-        console.log(`Received tabId: ${tabId}`);
-        console.log(`Received tabUrl: ${tabUrl}`);
+        // console.log(`Received tabId: ${tabId}`);
+        // console.log(`Received tabUrl: ${tabUrl}`);
 
         //reinitialize
         initializeJobDetails();

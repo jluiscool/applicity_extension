@@ -1,6 +1,6 @@
 {
-  "name": "Chrome React Extension with Clerk",
-  "description": "Test Chrome extensions with Clerk",
+  "name": "Applicity",
+  "description": "Beta extension",
   "version": "0.1",
   "manifest_version": 3,
   "action": {
