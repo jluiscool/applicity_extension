@@ -57,12 +57,15 @@ function initializeJobDetails() {
         jobInfo = jobInfo.replace(/^\s+/, '');
         // console.log(jobInfo + "this is the job info");
 
+        const currentUrl = window.location.href;
+
         // Return the extracted job details
         return {
             role_name: jobTitle,
             job_info: jobInfo,
             company_name: companyName,
-            salary: salary
+            salary: salary,
+            job_link: currentUrl
         };
     }
 
@@ -154,13 +157,6 @@ initializeJobDetails();
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.tabId && message.tabUrl) {
-        // Access the tab ID and URL from the message object
-        // const tabId = message.tabId;
-        // const tabUrl = message.tabUrl;
-
-        // Now you can use tabId and tabUrl in your content.js logic
-        // console.log(`Received tabId: ${tabId}`);
-        // console.log(`Received tabUrl: ${tabUrl}`);
 
         //reinitialize
         initializeJobDetails();
