@@ -9,6 +9,7 @@ jobInfo,
 */
 let bookmarkButton;
 let userEmail;
+const logoUrl = "https://i.ibb.co/37vyk40/logo.png";
 
 chrome.storage.local.get(['cache', 'cacheTime'], function (items) {
     userEmail = items.cache;
@@ -103,13 +104,24 @@ function initializeJobDetails() {
     function createBookmarkButton() {
         if (!bookmarkButton) { // Check if the button doesn't exist
             bookmarkButton = document.createElement('button');
-            bookmarkButton.style.width = '300px';
+            bookmarkButton.style.width = '80px';
             bookmarkButton.style.height = '40px';
             bookmarkButton.style.borderRadius = '24px';
-            bookmarkButton.style.backgroundColor = 'red';
-            bookmarkButton.style.borderWidth = '3px';
+            bookmarkButton.style.backgroundColor = '#171621';
+            bookmarkButton.style.display = 'inline-flex';
+            // Set display to inline-flex
+            bookmarkButton.style.marginTop = '8px'
+            // Add CSS styles to center content
+            bookmarkButton.style.justifyContent = 'center';
+            bookmarkButton.style.alignItems = 'center';
 
-            bookmarkButton.textContent = userEmail;
+            const img = document.createElement('img'); // Create an image element
+            img.src = logoUrl // Set the source URL for your image
+            img.style.height = '32px';
+            img.alt = 'Bookmark'; // Set an alt attribute for accessibility
+
+            // Append the image to the button
+            bookmarkButton.appendChild(img);
 
             const firstButtonContainer = document.querySelector('.jobs-unified-top-card__content--two-pane');
 
